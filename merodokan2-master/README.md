@@ -1,16 +1,8 @@
-# ReSale
-
-Sell or Advertise anything online with Resale
-
-<h2>Live Demo</h2>
-[Live Demo](https://resale.youngtimes24.com)
 
 <h2>Requirements</h2>
 <pre>open requirements.txt file to see requirements</pre>
 
-<h2>Installing</h2>
-<pre>open terminal and type</pre>
-<code>git clone https://github.com/MahmudulHassan5809/olx-clone-resale.git</code><br><br>
+
 
 <h2>To migrate the database open terminal in project directory and type</h2>
 <code>python manage.py makemigrations</code><br>
@@ -29,12 +21,3 @@ Sell or Advertise anything online with Resale
 
 <p>Then go to http://127.0.0.1:8000 in your browser</p>
 
-<h2>Author</h2>
-<blockquote>
-  Mahmudul Hassan<br>
-  Email: mahmudul.hassan240@gmail.com
-</blockquote>
-
-<div align="center">
-    <h3>========Thank You !!!=========</h3>
-</div>
