@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    {{title}}
+{% endblock title %}
+
+{% block breadcrumb %}
+    <li><a href="{% url 'products:home' %}">Home</a></li>
+    <li class="active">MyList</li>
+{% endblock breadcrumb %}
+
+{% block content %}
+
+        <section class="bg-light pt-5 pb-5 shadow-sm">
+            <div class="container">
+              <div class="row pt-5">
+                <div class="col-12">
+                  <h3 class="text-uppercase border-bottom mb-4">MY PRODUCTS ON SALE</h3>
+                </div>
+              </div>
+              <div class="row">
+
+                {% for ad in my_ad_list %}
+                <!--ADD CLASSES HERE d-flex align-items-stretch-->
+                <div class="col-lg-3 mb-4 d-flex align-items-stretch">
+                  <div class="card">
+                    {% with ad.product_images.all|first as image %}
+                    <img src="{{image.image.url}}"  class="card-img-top" alt="Card Image">
+                    {% endwith %}
+                    
+                    <div class="card-body d-flex flex-column">
+
+                        <h2 class="card-title">{{ad.title}}</h2>
+                        <h4 class="card-text">{{ad.title}}</h4>
+                        <h5 class="card-text">{{ad.price}}</h5>
+
+                        <p>
+                            <a target="_blank" href="{% url 'products:ad_detail' ad.slug  %}" class="btn btn-info btn-md" role="button">
+                                <i class="fa fa-eye"></i>
+                                View
+                            </a>
+
+                            <a href="{% url 'products:update_product' ad.slug %}" class="btn btn-success btn-md" role="button">
+                                <i class="fa fa-edit"></i>
+                                Update
+                            </a>
+                            <a class="delete_ad btn btn-md btn-danger"
+                            data-title="Delete {{ad.title}}?"
+                            href="{% url 'products:delete_ad' ad.id %}"><i class="fa fa-trash"></i> Delete</a>
+                            </a>
+                        </p>
+                    </div>
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+          </section>  
+        {% if is_paginated %}
+            {% include 'partials/_pagination.html' %}
+        {% endif %}
+    </div>
+<div class="clearfix"></div>
+</div>
+
+
+{% endblock content %}
+
+
+{% block script %}
+    <script type="text/javascript" src="{% static 'js/jquery-ui.js' %}"></script>
+    <script type='text/javascript'>//<![CDATA[
+    $(window).load(function(){
+     $( "#slider-range" ).slider({
+                range: true,
+                min: 0,
+                max: 9000,
+                values: [ 50, 6000 ],
+                slide: function( event, ui ) {  $( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
+                }
+     });
+    $( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0 ) + " - $" + $( "#slider-range" ).slider( "values", 1 ) );
+
+    });//]]>
+
+    </script>
+{% endblock script %}
